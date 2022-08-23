@@ -1,0 +1,49 @@
+body {
+    background-color: antiquewhite;
+}
+.quizBox {
+    margin: 200px;
+    padding: 120px;
+    border: solid 2px black;
+    background-color: azure;
+    border-radius: 7px;
+    text-align: center;
+}
+button {
+    position: relative;
+    top: 30px;
+    left: 45px;
+    font-size: 30px;
+    font-weight: 900;
+    border-radius: 7px;
+    background-color: azure;
+}
+button:hover {
+    background-color: black;
+    color: azure;
+    cursor: pointer;
+}
+button #quizAwnser {
+    font-size: 15px;
+    
+}
+h2 {
+    float: right;
+    margin-right: 80px;
+    margin-top: 40px;
+}
+#beginQ {
+   margin-right: 80px;
+   margin-top: 20px;
+}
+#quizQuestions {
+    font-size: 35px;
+    float: left;
+
+}
+.ans-btn {
+    display: block;
+    margin-top: 15px;
+    margin-left: 600px;
+    
+}
