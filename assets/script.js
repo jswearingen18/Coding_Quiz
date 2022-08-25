@@ -6,9 +6,6 @@ var quizRules = document.querySelector("#quiz");
 var quizQues = document.getElementById("quizQuestions");
 var scoreboard = document.querySelector("#scoreBoard");
 // variable to create click event for all answer buttons
-const ansTarget = document.querySelectorAll(".ans-btn")
-// buttons for selecting an answer
-
 var timeLeft;
 let answersA = document.getElementById("answerA");
 let answersB = document.getElementById("answerB");
@@ -26,6 +23,12 @@ beginTimer.addEventListener("click", e => {
     quizRules.textContent = " ";
    question1 ();
 })
+scoreboard.addEventListener("click", e => {
+    leaderBoard ();
+})
+function leaderBoard () {
+    window.alert("Wins: " + wins + "\nLosses: " + losses);
+}
 // Function for timer
 function countdown() {
     timeLeft = 60;
@@ -69,11 +72,11 @@ function question1 (event) {
 }
 // Function for question 2
 function question2 (event) {
-        // Click eventlistener for each button inside question2
-    //answersA.addEventListener("click", question2);
-    //answersB.addEventListener("click", question2);
-    //answersC.addEventListener("click", question2);
-    //answersD.addEventListener("click", question2);
+    //Click eventlistener for each button inside question2
+    answersA.addEventListener("click", question2);
+    answersB.addEventListener("click", question2);
+    answersC.addEventListener("click", question2);
+    answersD.addEventListener("click", question2);
     const ques2 = "What does URL stand for?";
     const opt2 = ["A. Ultimate Response Listening", "B. Unlimited Review Logistics", "C. Uniform Resource Locator", "D. Ur Response Logistics"]
     const ans2 = opt2 [2];
@@ -116,7 +119,7 @@ function question3 (event) {
     } else if (buttonEl.textContent != ans3) {
         timeLeft -= 10;
     }
-}    
+}
 // Function for question 4
 function question4 (event) {
         // Click eventlistener for each button inside question4
@@ -124,7 +127,7 @@ function question4 (event) {
     answersB.addEventListener("click", question4);
     answersC.addEventListener("click", question4);
     answersD.addEventListener("click", question4);
-    const ques4 = "Which of these are a legacy computer language?";
+    const ques4 = "Which of these are a \nlegacy computer language?";
     const opt4 = ["A. JQUERY", "B. BootStrap", "C. Java", "D. C++"];
     const ans4 = opt4[0];
     quizQues.textContent = ques4;
@@ -218,18 +221,7 @@ function question7 (event) {
         timeLeft -= 10;
     }        
 }    
-function leaderBoard () {
-    alert("Wins: " + wins + "\nLosses: " + losses);
-}
-
-
- //var array = [
-    //{question1: "What is Cat?",
-    //options: ["A. Bootsstrap", "B. Boot-Strap", "C. Bootstrap", "D. Boots_Strap"],
-    //answer: "C. Bootstrap"
-    //}
-//]
-var quizArray = [
+var quizQuestions = [
     {question: "What does CSS stand for?",
      options: ["A. Color Selector Sheet", "B. Cascading Style Sheet", "C. Colaborating Styling Sheet", "D. Computer Styling Sheet"],
      answer: "B. Cascading Style Sheet"
@@ -259,4 +251,19 @@ var quizArray = [
      answer: "C. Bootstrap"
     }
 ]
-console.log(quizArray);
+var currentQuestionIndex = 0;
+
+function getQuestion() {
+    var currentQuestion = question[currentQuestionIndex];
+    var titleEl = document.getElementById("question-title");
+    titleEl.textContent = currentQuestion.title;
+    choicesEl.innerHTML="";
+    for(var i = 0; i < currentQuestion.choices.length; i++) {
+        var choice = currentQuestion.choices[i];
+        var choiceNode = document.createElement("button");
+        choiceNode.setAttribute("class", "choice");
+        choiceNode.setAttribute("value", choice);
+        choiceNode.textContent = i + 1 + ". " + choice;
+    choicesEl.appendChild(choiceNode);
+    }
+}
