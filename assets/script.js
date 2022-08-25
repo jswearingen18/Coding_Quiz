@@ -58,22 +58,22 @@ function question1 (event) {
     answersC.textContent = opt1[2];
     answersD.textContent = opt1[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent === ans1) {
-        question2 ();
+    if (buttonEl.textContent != ans1) {
+        timeLeft -= 10;
     } else if (timeLeft == 0) {
         quizHeader.textContent = "You Have Lost";
         losses++;
-    } else if (buttonEl.textContent != ans1) {
-        timeLeft -= 10;
+    } else {
+        question2 ();
     }
 }
 // Function for question 2
 function question2 (event) {
         // Click eventlistener for each button inside question2
-    answersA.addEventListener("click", question2);
-    answersB.addEventListener("click", question2);
-    answersC.addEventListener("click", question2);
-    answersD.addEventListener("click", question2);
+    //answersA.addEventListener("click", question2);
+    //answersB.addEventListener("click", question2);
+    //answersC.addEventListener("click", question2);
+    //answersD.addEventListener("click", question2);
     const ques2 = "What does URL stand for?";
     const opt2 = ["A. Ultimate Response Listening", "B. Unlimited Review Logistics", "C. Uniform Resource Locator", "D. Ur Response Logistics"]
     const ans2 = opt2 [2];
@@ -83,13 +83,13 @@ function question2 (event) {
     answersC.textContent = opt2[2];
     answersD.textContent = opt2[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent === ans2) {
-       question3 ();
+    if (buttonEl.textContent != ans2) {
+        timeLeft -= 10;
     } else if (timeLeft == 0) {
         quizHeader.textContent = "You Have Lost";
         losses++;
-    } else if (buttonEl.textContent != ans2) {
-        timeLeft -= 10;
+    } else {
+        question3 ();
     }
 }
 // Function for question 3
@@ -229,3 +229,34 @@ function leaderBoard () {
     //answer: "C. Bootstrap"
     //}
 //]
+var quizArray = [
+    {question: "What does CSS stand for?",
+     options: ["A. Color Selector Sheet", "B. Cascading Style Sheet", "C. Colaborating Styling Sheet", "D. Computer Styling Sheet"],
+     answer: "B. Cascading Style Sheet"
+    },
+    {question: "What does URL stand for?",
+     options: ["A. Ultimate Response Listening", "B. Unlimited Review Logistics", "C. Uniform Resource Locator", "D. Ur Response Logistics"],
+     answer: "C. Uniform Resource Locator"
+    },
+    {question: "Which of these are a primitive Data type?",
+     options: ["A. JSON", "B. Array", "C. Class", "D. String"],
+     answer: "D. String" 
+    },
+    {question: "Which of these are a legacy computer language?",
+     options: ["A. JQUERY", "B. BootStrap", "C. Java", "D. C++"],
+     answer: "A. JQUERY"
+    },
+    {question: "Which of these are used to display coding projects?",
+     options: ["A. Twitter", "B. Facebook", "C. Indeed", "D. Github"],
+     answer: "D. Github"
+    },
+    {question: "Which of these is a container element?",
+     options: ["A. <HTML>", "B. <title>", "C. <Span>", "D. <head>"],
+     answer: "C. <Span>"
+    },
+    {question: "Which of these real computer languages?",
+     options: ["A. Bootsstrap", "B. Boot-Strap", "C. Bootstrap", "D. Boots_Strap"],
+     answer: "C. Bootstrap"
+    }
+]
+console.log(quizArray);
