@@ -5,8 +5,9 @@ var quizHeader = document.getElementById("quizIntro");
 var quizRules = document.querySelector("#quiz");
 var quizQues = document.getElementById("quizQuestions");
 var scoreboard = document.querySelector("#scoreBoard");
+//var ansBtn = document.getElementsByClassName("ans-btn");
 // variable to create click event for all answer buttons
-var timeLeft;
+var timeLeft = 60;;
 let answersA = document.getElementById("answerA");
 let answersB = document.getElementById("answerB");
 let answersC = document.getElementById("answerC");
@@ -21,8 +22,63 @@ beginTimer.addEventListener("click", e => {
     quizHeader.textContent = " ";
     // clears rules out to display quiz
     quizRules.textContent = " ";
-   question1 ();
-})
+    question1();
+}) 
+//ansBtn.addEventListener("click", e => {
+    //checkAnswer ();
+//})
+// Array for questions and options
+var quizQuestions = [
+    {question: "What does CSS stand for?",
+     options: ["A. Color Selector Sheet", "B. Cascading Style Sheet", "C. Colaborating Styling Sheet", "D. Computer Styling Sheet"],
+     answer: "B. Cascading Style Sheet"},
+    {question: "What does URL stand for?",
+     options: ["A. Ultimate Response Listening", "B. Unlimited Review Logistics", "C. Uniform Resource Locator", "D. Ur Response Logistics"],
+     answer: "C. Uniform Resource Locator"},
+    {question: "Which of these are a primitive Data type?",
+     options: ["A. JSON", "B. Array", "C. Class", "D. String"],
+     answer: "D. String"},
+    {question: "Which of these are a legacy computer language?",
+     options: ["A. JQUERY", "B. BootStrap", "C. Java", "D. C++"],
+     answer: "A. JQUERY"},
+    {question: "Which of these are used to display coding projects?",
+     options: ["A. Twitter", "B. Facebook", "C. Indeed", "D. Github"],
+     answer: "D. Github"},
+    {question: "Which of these is a container element?",
+     options: ["A. <HTML>", "B. <title>", "C. <Span>", "D. <head>"],
+     answer: "C. <Span>"},
+    {question: "Which of these real computer languages?",
+     options: ["A. Bootsstrap", "B. Boot-Strap", "C. Bootstrap", "D. Boots_Strap"],
+     answer: "C. Bootstrap"}
+]
+//function checkAnswer () { 
+    //quizQues.textContent = quizQuestions[i].question;
+    //answersA.textContent = quizQuestions[i].options[0];
+    //answersB.textContent = quizQuestions[i].options[1];
+    //answersC.textContent = quizQuestions[i].options[2];
+    //answersD.textContent = quizQuestions[i].options[3];
+    //var buttonEl = target;
+    //for (var i = 0; i < quizQuestions.length; i++) {
+        //quizQues.textContent = quizQuestions[i].question;
+        //answersA.textContent = quizQuestions[i].options[0];
+        //answersB.textContent = quizQuestions[i].options[1];
+        //answersC.textContent = quizQuestions[i].options[2];
+        //answersD.textContent = quizQuestions[i].options[3];
+   // if (buttonEl.textContent === quizQuestions[i].answer) {
+        //alert("You Got 10 Points");
+    //} else {
+        //timeLeft -= 10;
+    //}
+    //}
+//}
+//function getQuestion() {
+        //quizQues.textContent = quizQuestions[0].question;
+        //answersA.textContent = quizQuestions[i].options[0];
+        //answersB.textContent = quizQuestions[i].options[1];
+        //answersC.textContent = quizQuestions[i].options[2];
+        //answersD.textContent = quizQuestions[i].options[3];
+    //}
+//}
 scoreboard.addEventListener("click", e => {
     leaderBoard ();
 })
@@ -31,7 +87,6 @@ function leaderBoard () {
 }
 // Function for timer
 function countdown() {
-    timeLeft = 60;
     var timeInterval = setInterval(function () {
         if (timeLeft > 1) {
             timerEl.textContent = timeLeft + " seconds remaining";
@@ -41,6 +96,8 @@ function countdown() {
             timeLeft--;
         } else {
             timerEl.textContent = "Time Is Up";
+            quizHeader.textContent = "You Have Lost";
+            losses++;
             clearInterval(timeInterval);
         }
     }, 1000);
@@ -52,22 +109,16 @@ function question1 (event) {
     answersB.addEventListener("click", question1);
     answersC.addEventListener("click", question1);
     answersD.addEventListener("click", question1);
-    const ques1 = "What does CSS stand for?";
-    const opt1 = ["A. Color Selector Sheet", "B. Cascading Style Sheet", "C. Colaborating Styling Sheet", "D. Computer Styling Sheet"]
-    const ans1 = opt1[1];
-    quizQues.textContent = ques1;
-    answersA.textContent = opt1[0];
-    answersB.textContent = opt1[1];
-    answersC.textContent = opt1[2];
-    answersD.textContent = opt1[3];
+    quizQues.textContent = quizQuestions[0].question;
+    answersA.textContent = quizQuestions[0].options[0];
+    answersB.textContent = quizQuestions[0].options[1];
+    answersC.textContent = quizQuestions[0].options[2];
+    answersD.textContent = quizQuestions[0].options[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent != ans1) {
-        timeLeft -= 10;
-    } else if (timeLeft == 0) {
-        quizHeader.textContent = "You Have Lost";
-        losses++;
-    } else {
-        question2 ();
+    if (buttonEl.textContent === quizQuestions[0].options[1]) {
+        question2();
+    } else if (buttonEl.textContent != quizQuestions[0].options[1]) {
+        timeLeft = timeLeft - 10;
     }
 }
 // Function for question 2
@@ -77,22 +128,16 @@ function question2 (event) {
     answersB.addEventListener("click", question2);
     answersC.addEventListener("click", question2);
     answersD.addEventListener("click", question2);
-    const ques2 = "What does URL stand for?";
-    const opt2 = ["A. Ultimate Response Listening", "B. Unlimited Review Logistics", "C. Uniform Resource Locator", "D. Ur Response Logistics"]
-    const ans2 = opt2 [2];
-    quizQues.textContent = ques2;
-    answersA.textContent = opt2[0];
-    answersB.textContent = opt2[1];
-    answersC.textContent = opt2[2];
-    answersD.textContent = opt2[3];
+    quizQues.textContent = quizQuestions[1].question;
+    answersA.textContent = quizQuestions[1].options[0];
+    answersB.textContent = quizQuestions[1].options[1];
+    answersC.textContent = quizQuestions[1].options[2];
+    answersD.textContent = quizQuestions[1].options[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent != ans2) {
-        timeLeft -= 10;
-    } else if (timeLeft == 0) {
-        quizHeader.textContent = "You Have Lost";
-        losses++;
-    } else {
-        question3 ();
+    if (buttonEl.textContent === quizQuestions[1].options[2]) {
+        question3 ();  
+    } else if (buttonEl.textContent != quizQuestions[1].options[2]) {
+        timeLeft = timeLeft - 10;
     }
 }
 // Function for question 3
@@ -102,21 +147,15 @@ function question3 (event) {
     answersB.addEventListener("click", question3);
     answersC.addEventListener("click", question3);
     answersD.addEventListener("click", question3);
-    const ques3 = "Which of these are a primitive Data type?";
-    const opt3 = ["A. JSON", "B. Array", "C. Class", "D. String"];
-    const ans3 = opt3[3];
-    quizQues.textContent = ques3;
-    answersA.textContent = opt3[0];
-    answersB.textContent = opt3[1];
-    answersC.textContent = opt3[2];
-    answersD.textContent = opt3[3];
+    quizQues.textContent = quizQuestions[2].question;
+    answersA.textContent = quizQuestions[2].options[0];
+    answersB.textContent = quizQuestions[2].options[1];
+    answersC.textContent = quizQuestions[2].options[2];
+    answersD.textContent = quizQuestions[2].options[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent === ans3) {
+    if (buttonEl.textContent === quizQuestions[2].options[3]) {
         question4 ();
-    } else if (timeLeft == 0) {
-        quizHeader.textContent = "You Have Lost";
-        losses++;
-    } else if (buttonEl.textContent != ans3) {
+    } else if (buttonEl.textContent != quizQuestions[2].options[3]) {
         timeLeft -= 10;
     }
 }
@@ -127,21 +166,15 @@ function question4 (event) {
     answersB.addEventListener("click", question4);
     answersC.addEventListener("click", question4);
     answersD.addEventListener("click", question4);
-    const ques4 = "Which of these are a \nlegacy computer language?";
-    const opt4 = ["A. JQUERY", "B. BootStrap", "C. Java", "D. C++"];
-    const ans4 = opt4[0];
-    quizQues.textContent = ques4;
-    answersA.textContent = opt4[0];
-    answersB.textContent = opt4[1];
-    answersC.textContent = opt4[2];
-    answersD.textContent = opt4[3];
+    quizQues.textContent = quizQuestions[3].question;
+    answersA.textContent = quizQuestions[3].options[0];
+    answersB.textContent = quizQuestions[3].options[1];
+    answersC.textContent = quizQuestions[3].options[2];
+    answersD.textContent = quizQuestions[3].options[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent === ans4) {
+    if (buttonEl.textContent === quizQuestions[3].options[0]) {
         question5 ();
-    } else if (timeLeft == 0) {
-        quizHeader.textContent = "You Have Lost";
-        losses++;
-    } else if (buttonEl.textContent != ans4) {
+    } else if (buttonEl.textContent != quizQuestions[3].options[0]) {
         timeLeft -= 10;
     }
 }
@@ -152,21 +185,15 @@ function question5 (event) {
     answersB.addEventListener("click", question5);
     answersC.addEventListener("click", question5);
     answersD.addEventListener("click", question5);
-    const ques5 = "Which of these are used to display coding projects?";
-    const opt5 = ["A. Twitter", "B. Facebook", "C. Indeed", "D. Github"];
-    const ans5 = opt5[3];
-    quizQues.textContent = ques5;
-    answersA.textContent = opt5[0];
-    answersB.textContent = opt5[1];
-    answersC.textContent = opt5[2];
-    answersD.textContent = opt5[3];
+    quizQues.textContent = quizQuestions[4].question;
+    answersA.textContent = quizQuestions[4].options[0];
+    answersB.textContent = quizQuestions[4].options[1];
+    answersC.textContent = quizQuestions[4].options[2];
+    answersD.textContent = quizQuestions[4].options[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent === ans5) {
+    if (buttonEl.textContent === quizQuestions[4].options[3]) {
         question6 ();
-    } else if (timeLeft == 0) {
-        quizHeader.textContent = "You Have Lost";
-        losses++;
-    } else if (buttonEl.textContent != ans5) {
+    } else if (buttonEl.textContent != quizQuestions[4].options[3]) {
         timeLeft -= 10;
     }
 }
@@ -177,23 +204,17 @@ function question6 (event) {
     answersB.addEventListener("click", question6);
     answersC.addEventListener("click", question6);
     answersD.addEventListener("click", question6);
-    const ques6 = "Which of these is a container element?";
-    const opt6 = ["A. <HTML>", "B. <title>", "C. <Span>", "D. <head>"];
-    const ans6 = opt6[2];
-    quizQues.textContent = ques6;
-    answersA.textContent = opt6[0];
-    answersB.textContent = opt6[1];
-    answersC.textContent = opt6[2];
-    answersD.textContent = opt6[3];
+    quizQues.textContent = quizQuestions[5].question;
+    answersA.textContent = quizQuestions[5].options[0];
+    answersB.textContent = quizQuestions[5].options[1];
+    answersC.textContent = quizQuestions[5].options[2];
+    answersD.textContent = quizQuestions[5].options[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent === ans6) {
+    if (buttonEl.textContent === quizQuestions[5].options[2]) {
         question7 ();
-    } else if (timeLeft == 0) {
-        quizHeader.textContent = "You Have Lost";
-        losses++;
-    } else if (buttonEl.textContent != ans6 ) {
+    } else if (buttonEl.textContent != quizQuestions[5].options[2]) {
         timeLeft -= 10;
-        } 
+    } 
 }   
 // Function for question 7
 function question7 (event) {
@@ -202,68 +223,16 @@ function question7 (event) {
     answersB.addEventListener("click", question7);
     answersC.addEventListener("click", question7);
     answersD.addEventListener("click", question7);
-    const ques7 = "Which of these real computer languages?";
-    const opt7 = ["A. Bootsstrap", "B. Boot-Strap", "C. Bootstrap", "D. Boots_Strap"];
-    const ans7 = opt7[2];
-    quizQues.textContent = ques7;
-    answersA.textContent = opt7[0];
-    answersB.textContent = opt7[1];
-    answersC.textContent = opt7[2];
-    answersD.textContent = opt7[3];
+    quizQues.textContent = quizQuestions[6].question;
+    answersA.textContent = quizQuestions[6].options[0];
+    answersB.textContent = quizQuestions[6].options[1];
+    answersC.textContent = quizQuestions[6].options[2];
+    answersD.textContent = quizQuestions[6].options[3];
     var buttonEl = event.target;
-    if (buttonEl.textContent === ans7) {
+    if (buttonEl.textContent === quizQuestions[6].options[2]) {
         quizQues.textContent = "Congratulations\nYou Have Won";
         wins++;
-    } else if (timeLeft == 0) {
-        quizHeader.textContent = "You Have Lost";
-        losses++;
-    } else if (buttonEl.textContent != ans7) {
+    } else if (buttonEl.textContent != quizQuestions[6].options[2]) {
         timeLeft -= 10;
     }        
 }    
-var quizQuestions = [
-    {question: "What does CSS stand for?",
-     options: ["A. Color Selector Sheet", "B. Cascading Style Sheet", "C. Colaborating Styling Sheet", "D. Computer Styling Sheet"],
-     answer: "B. Cascading Style Sheet"
-    },
-    {question: "What does URL stand for?",
-     options: ["A. Ultimate Response Listening", "B. Unlimited Review Logistics", "C. Uniform Resource Locator", "D. Ur Response Logistics"],
-     answer: "C. Uniform Resource Locator"
-    },
-    {question: "Which of these are a primitive Data type?",
-     options: ["A. JSON", "B. Array", "C. Class", "D. String"],
-     answer: "D. String" 
-    },
-    {question: "Which of these are a legacy computer language?",
-     options: ["A. JQUERY", "B. BootStrap", "C. Java", "D. C++"],
-     answer: "A. JQUERY"
-    },
-    {question: "Which of these are used to display coding projects?",
-     options: ["A. Twitter", "B. Facebook", "C. Indeed", "D. Github"],
-     answer: "D. Github"
-    },
-    {question: "Which of these is a container element?",
-     options: ["A. <HTML>", "B. <title>", "C. <Span>", "D. <head>"],
-     answer: "C. <Span>"
-    },
-    {question: "Which of these real computer languages?",
-     options: ["A. Bootsstrap", "B. Boot-Strap", "C. Bootstrap", "D. Boots_Strap"],
-     answer: "C. Bootstrap"
-    }
-]
-var currentQuestionIndex = 0;
-
-function getQuestion() {
-    var currentQuestion = question[currentQuestionIndex];
-    var titleEl = document.getElementById("question-title");
-    titleEl.textContent = currentQuestion.title;
-    choicesEl.innerHTML="";
-    for(var i = 0; i < currentQuestion.choices.length; i++) {
-        var choice = currentQuestion.choices[i];
-        var choiceNode = document.createElement("button");
-        choiceNode.setAttribute("class", "choice");
-        choiceNode.setAttribute("value", choice);
-        choiceNode.textContent = i + 1 + ". " + choice;
-    choicesEl.appendChild(choiceNode);
-    }
-}
